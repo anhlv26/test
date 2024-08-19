@@ -1,4 +1,6 @@
-import { Box, Button, ButtonProps, styled } from "@mui/material";
+import { styled, ButtonProps } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import React from "react";
 
 interface ButtonComponentProps extends ButtonProps {
@@ -12,11 +14,11 @@ const StyledButton = styled(Button)<ButtonComponentProps>(() => ({
   borderRadius: "6px",
   height: "40px",
   marginTop: "12px",
-  color:"#000",
-  fontSize:"14px",
-  textTransform:"none",
-  border:"1px solid #fa8002",
-  fontWeight:"300",
+  color: "#000",
+  fontSize: "14px",
+  textTransform: "none",
+  border: "1px solid #fa8002",
+  fontWeight: "300",
   "&:hover": {
     backgroundColor: "#fdd13a",
   },
