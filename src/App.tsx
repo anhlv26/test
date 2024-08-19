@@ -14,7 +14,6 @@ function App() {
         </Routes>
       </Router>
     </Box>
-    // <div>123</div>
   );
 }
 
