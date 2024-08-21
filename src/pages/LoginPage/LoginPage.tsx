@@ -103,7 +103,6 @@ const LoginPage = () => {
                   type=""
                   size="small"
                   label="Tên đăng nhập"
-                  id="outlined-start-adornment"
                   sx={{ width: "100%" }}
                 />
                 <CssTextField
@@ -114,7 +113,6 @@ const LoginPage = () => {
                   helperText={errors.password?.message}
                   size="small"
                   label="Mật khẩu"
-                  id="outlined-start-adornment"
                   sx={{
                     width: "100%",
                     mb: "24px",

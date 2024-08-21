@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
+import React from "react";
+import DefaultLayout from "~/components/DefaultLayout/DefaultLayout";
 
 function App() {
   return (
@@ -9,7 +11,20 @@ function App() {
         <Routes>
           {routes.map((route, index) => {
             const Page = route.page;
-            return <Route key={index} path={route.path} element={<Page />} />;
+            const Layout: React.FC<{ children: React.ReactNode }> =
+              route.isDefaultLayout ? DefaultLayout : React.Fragment;
+
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page children={undefined} />
+                  </Layout>
+                }
+              />
+            );
           })}
         </Routes>
       </Router>

@@ -60,8 +60,6 @@ const ModalForgotPassword: React.FC<ModalForgotPasswordProps> = ({
 }) => {
   return (
     <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
       open={open}
       onClose={handleClose}
       closeAfterTransition
@@ -107,7 +105,6 @@ const ModalForgotPassword: React.FC<ModalForgotPasswordProps> = ({
               //   helperText={errors.password?.message}
               size="small"
               label="Email *"
-              id="outlined-start-adornment"
               sx={{
                 width: "100%",
                 mb: "20px",
@@ -118,10 +115,7 @@ const ModalForgotPassword: React.FC<ModalForgotPasswordProps> = ({
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      edge="end"
-                    >
+                    <IconButton>
                       <EmailOutlinedIcon />
                     </IconButton>
                   </InputAdornment>
