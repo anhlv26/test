@@ -24,9 +24,10 @@ const HeaderComponent = () => {
               alignItems: "center",
               height: "48px",
               width: "48px",
+              cursor: "pointer",
             }}
           >
-            <ClearIcon sx={{ fontSize: "20px", cursor: "pointer" }} />
+            <ClearIcon sx={{ fontSize: "20px" }} />
           </Box>
           <Box
             sx={{
@@ -51,9 +52,10 @@ const HeaderComponent = () => {
               justifyContent: "center",
               height: "48px",
               width: "48px",
+              cursor: "pointer",
             }}
           >
-            <AccountCircleIcon sx={{ fontSize: "20px", cursor: "pointer" }} />
+            <AccountCircleIcon sx={{ fontSize: "20px" }} />
           </Box>
           <Box
             sx={{
@@ -63,11 +65,10 @@ const HeaderComponent = () => {
               height: "48px",
               width: "48px",
               bgcolor: "#FCB71E",
+              cursor: "pointer",
             }}
           >
-            <NotificationsNoneOutlinedIcon
-              sx={{ fontSize: "20px", cursor: "pointer" }}
-            />
+            <NotificationsNoneOutlinedIcon sx={{ fontSize: "20px" }} />
           </Box>
         </Box>
       </Box>

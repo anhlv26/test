@@ -4,11 +4,22 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useState } from "react";
+import React, { useState } from "react";
 import { styled, TextField, Typography } from "@mui/material";
 import ButtonCustom from "~/components/ButtonCustom/ButtonCustom";
+import { useForm } from "react-hook-form";
+
+import ModalForgotPassword from "~/components/ModalForgotPassword/ModalForgotPassword";
+
+interface FormValues {
+  username: string;
+  password: string;
+}
 
 const CssTextField = styled(TextField)({
+  "& .MuiInputLabel-root.Mui-error": {
+    color: "#6F7E8C",
+  },
   "& label.Mui-focused": {
     color: "#A0AAB4",
   },
@@ -28,11 +39,28 @@ const CssTextField = styled(TextField)({
   },
 });
 
-const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
 
+const LoginPage = () => {
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = form;
+  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  //handle submit form
+  const onSubmit = (data: FormValues) => {};
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
   return (
     <Box>
       <Grid container>
@@ -58,55 +86,86 @@ const LoginPage = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
+                width: "100%",
+                padding: "0 20px",
               }}
             >
-              <CssTextField
-                size="small"
-                label="Tên đăng nhập"
-                id="outlined-start-adornment"
-                sx={{ m: 1, width: "25ch", padding: "0", minWidth: "300px" }}
-              />
-              <Box sx={{ position: "relative" }}>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                style={{ width: "100%", margin: "0", padding: "0" }}
+              >
                 <CssTextField
+                  {...register("username", {
+                    required: "Vui lòng không để trống trường này",
+                  })}
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
+                  type=""
+                  size="small"
+                  label="Tên đăng nhập"
+                  id="outlined-start-adornment"
+                  sx={{ width: "100%" }}
+                />
+                <CssTextField
+                  {...register("password", {
+                    required: "Vui lòng không để trống trường này",
+                  })}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
                   size="small"
                   label="Mật khẩu"
                   id="outlined-start-adornment"
-                  sx={{ m: 1, width: "25ch", padding: "0", minWidth: "300px" }}
+                  sx={{
+                    width: "100%",
+                    mb: "24px",
+                    mt: "16px",
+                    position: "relative",
+                  }}
                   type={showPassword ? "text" : "password"}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-
-                <InputAdornment
-                  position="end"
-                  sx={{ position: "absolute", top: "50%", right: "20px" }}
-                >
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              </Box>
-              <ButtonCustom textButton="Đăng nhập" />
+                <ButtonCustom type="submit" textButton="Đăng nhập" fullWidth />
+              </form>
               <Typography
+                onClick={handleOpenModal}
                 sx={{
                   fontSize: "10px",
                   fontWeight: "600",
                   mt: "8px",
                   color: "#3B76AC",
-                  cursor:"pointer",
+                  cursor: "pointer",
                 }}
               >
                 Quên mật khẩu?
               </Typography>
             </Box>
           </Box>
+          <ModalForgotPassword open={open} handleClose={handleCloseModal}/>
         </Grid>
         <Grid item md={9}>
-          <Box>
-            <img src="./src/assets/bgLogin.png" style={{ height: "730px" }} />
-          </Box>
+          <Box
+            sx={{
+              height: "100vh",
+              width: "100%",
+              backgroundImage: "url(./src/assets/bgLogin.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              overflow: "hidden",
+            }}
+          />
         </Grid>
       </Grid>
     </Box>

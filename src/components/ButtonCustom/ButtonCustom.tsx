@@ -10,17 +10,19 @@ interface ButtonComponentProps extends ButtonProps {
 
 const StyledButton = styled(Button)<ButtonComponentProps>(() => ({
   backgroundColor: "#FCB71E",
-  padding: "10px 20px",
-  borderRadius: "6px",
-  height: "40px",
-  marginTop: "12px",
+  padding: "0 8px",
+  borderRadius: "4px",
   color: "#000",
   fontSize: "14px",
   textTransform: "none",
   border: "1px solid #fa8002",
   fontWeight: "300",
+  height: "36px",
   "&:hover": {
     backgroundColor: "#fdd13a",
+  },
+  "& > *:first-child": {
+    fontSize: "15px",
   },
 }));
 
@@ -29,11 +31,7 @@ const ButtonCustom: React.FC<ButtonComponentProps> = ({
   onClick,
   ...rest
 }) => {
-  return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <StyledButton {...rest}>{textButton}</StyledButton>
-    </Box>
-  );
+  return <StyledButton {...rest}>{textButton}</StyledButton>;
 };
 
 export default ButtonCustom;
